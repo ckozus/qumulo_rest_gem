@@ -71,7 +71,7 @@ module Qumulo::Rest
     # JSON::ParserError if successful response does not contain valid JSON
     #
     def http_execute(request)
-      request.content_type = "application/json"
+      request.content_type ||= "application/json"
       request["Authorization"] = @bearer_token if @bearer_token
       http = Net::HTTP.new(@host, @port)
       http.use_ssl = true
@@ -142,6 +142,24 @@ module Qumulo::Rest
         put["if-match"] = etag
       end
       http_execute(put)
+    end
+
+    # === Description
+    # Perform PUT request and allow the body and headers to be specified.
+    #
+    # === Parameters
+    # path:: URI path, including query string parameters
+    # attrs:: Hash object containing key-value pairs representing resource
+    # options:: (optional) Allows options such as :headers to be passed in
+    #
+    # === Returns
+    # result Hash object
+    #
+    def put_raw(path, body = nil, options = { })
+      headers = options[:headers]
+      post = Net::HTTP::Put.new(path, headers)
+      post.body = body
+      http_execute(post)
     end
 
     # === Description
