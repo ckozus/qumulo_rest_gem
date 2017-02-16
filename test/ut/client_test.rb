@@ -100,7 +100,7 @@ module Qumulo::Rest
     end
 
     def test_client_login_success
-      FakeHttp.set_fake_response(:post, "/v1/login", {
+      FakeHttp.set_fake_response(:post, "/v1/session/login", {
         :code => 203,
         :attrs => {
           "key" => "fake-key",
@@ -116,7 +116,7 @@ module Qumulo::Rest
     end
 
     def test_client_login_failure
-      FakeHttp.set_fake_response(:post, "/v1/login", {
+      FakeHttp.set_fake_response(:post, "/v1/session/login", {
         :code => 401,
         :error => {
           "msg" => "password mismatch",

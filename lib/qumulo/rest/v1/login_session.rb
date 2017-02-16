@@ -29,7 +29,7 @@ module Qumulo::Rest::V1
   #
   class LoginSession < Qumulo::Rest::Base
 
-    uri_spec "/v1/login"
+    uri_spec "/v1/session/login"
 
     # only used in post
     field :username, String

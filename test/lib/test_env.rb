@@ -81,7 +81,7 @@ module Qumulo::Rest
     # Setting up fake connection and login
     #
     def set_up_fake_connection
-      FakeHttp.set_fake_response(:post, "/v1/login", {
+      FakeHttp.set_fake_response(:post, "/v1/session/login", {
         :code => 203,
         :attrs => {
           "key" => "fake-key",
